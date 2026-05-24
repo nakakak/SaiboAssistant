@@ -42,9 +42,9 @@ git push
 
 GitHub 上会直接显示图片；Release 说明里也可贴同路径图片（需已在仓库中）。
 
-## 截图时注意
+## 截图与文档约定
 
 - 可打码：Token、内网 IP、完整 MAC（若不想公开）。
-- 文档说明：**当前仅支持 MAC 配对**；连接码截图勿作为 v0.2.14 操作指引。
+- **v0.2.14 配对**：文档与截图均按 **仅设备 MAC** 编写；勿引导用户使用 6 位验证码（**该功能后续版本才实现**）。
 - 公网云示例地址：`wss://xiaozhi.cyberai.top/bridge/connector`
 - 不要与「管理台 WebSocket `.../ws`」混淆，助手必须是 `.../bridge/connector`

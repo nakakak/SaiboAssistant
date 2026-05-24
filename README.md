@@ -25,16 +25,16 @@
 
 - 修复切换商家云后，运行状态窗口**仍显示旧 server_url** 的问题（保存/重连后会刷新）。
 
-## 设备配对说明
+## 设备配对说明（v0.2.14）
 
-- **当前仅支持设备 MAC 地址** 连接商家云（在向导/连接设置中选「设备 MAC」填写）。
-- **暂不支持** 6 位连接码/验证码配对（后续版本更新）。
+- ✅ **仅支持设备 MAC 地址** 连接商家云。
+- ❌ **6 位验证码 / 连接码尚不能使用**（界面可能仍显示，请勿选择）；该能力为 **后期实现**，后续版本会更新文档与 Release 说明。
 
 ## 商家云地址（与 xiaozhi.cyberai.top 对齐）
 
 | 用途 | 地址 |
 |------|------|
-| 管理台 | https://xiaozhi.cyberai.top/admin |
+| 商家云登录 | https://xiaozhi.cyberai.top |
 | **赛搏小小助手 server_url** | **`wss://xiaozhi.cyberai.top/bridge/connector`** |
 | 设备 OTA（固件） | `https://xiaozhi.cyberai.top/api/ota/` |
 
