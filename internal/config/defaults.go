@@ -6,7 +6,7 @@ import (
 )
 
 // DefaultBridgeServerURL 内置商家云桥接地址；可用环境变量 MIAOBAN_BRIDGE_SERVER_URL 覆盖（私有化部署）。
-const DefaultBridgeServerURL = "ws://192.168.50.52:8084/bridge/connector"
+const DefaultBridgeServerURL = "wss://xiaozhi.cyberai.top/bridge/connector"
 
 // DefaultServerURL 返回 Connector 默认 server_url。
 func DefaultServerURL() string {

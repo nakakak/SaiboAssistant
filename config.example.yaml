@@ -15,9 +15,9 @@
 # channels 可由向导写入；也可在此手动指定 openclaw / telnet 布尔值。
 
 # 商家云 WebSocket 地址（须包含路径 /bridge/connector；不要手写 query，程序会自动附加 device_mac）
-# 本机局域网（默认）：ws://192.168.50.52:8084/bridge/connector
-# 公网云：wss://xiaozhi.cyberai.top/bridge/connector
-server_url: "ws://192.168.50.52:8084/bridge/connector"
+# 公网云（默认）：wss://xiaozhi.cyberai.top/bridge/connector
+# 局域网测试：ws://192.168.50.52:8084/bridge/connector
+server_url: "wss://xiaozhi.cyberai.top/bridge/connector"
 
 # 喵伴设备 MAC；与 pair_code 二选一即可：只填验证码时启动会自动解析 MAC 并写回本文件。
 device_mac: "AA:BB:CC:DD:EE:FF"

@@ -15,11 +15,12 @@
 
 | 版本 | GitHub | 6 位连接码 | 获取方式 |
 |------|--------|------------|----------|
-| **v0.2.16**（当前 Latest，推荐） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.16) | ✅ | 内置 `ws://192.168.50.52:8084/bridge/connector` |
+| **v0.2.17**（当前 Latest，推荐） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.17) | ✅ | 内置 `wss://xiaozhi.cyberai.top/bridge/connector` |
+| **v0.2.16** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.16) | ✅ | 内置 `ws://192.168.50.52:8084/bridge/connector` |
 | **v0.2.15** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.15) | ✅ | 内置 `192.168.50.176` |
 | **v0.2.14** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.14) | ❌ 仅 MAC | 历史版本 |
 
-### 各操作系统 Release 文件（v0.2.16）
+### 各操作系统 Release 文件（v0.2.17）
 
 | 系统 | CPU | 下载文件 |
 |------|-----|----------|
@@ -33,7 +34,7 @@
 
 ```bash
 curl -fL -o SaiboAssistant-macOS-arm64 \
-  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.16/SaiboAssistant-macOS-arm64
+  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.17/SaiboAssistant-macOS-arm64
 chmod +x SaiboAssistant-macOS-arm64 && ./SaiboAssistant-macOS-arm64
 ```
 
@@ -63,11 +64,15 @@ go build -trimpath -ldflags="-s -w" -o SaiboAssistant ./cmd/openclaw-connector
 ```bash
 npm install && npm install -g .
 openclaw gateway
-export MIAOBAN_BRIDGE_SERVER_URL="ws://192.168.50.52:8084/bridge/connector"
+export MIAOBAN_BRIDGE_SERVER_URL="wss://xiaozhi.cyberai.top/bridge/connector"
 miaoban-bridge --pair 123456
 ```
 
 ---
+
+## v0.2.17 变更
+
+- 内置商家云地址改为 `wss://xiaozhi.cyberai.top/bridge/connector`（公网云）；局域网仍可用环境变量或连接设置覆盖
 
 ## v0.2.16 变更
 
@@ -76,7 +81,7 @@ miaoban-bridge --pair 123456
 ## v0.2.15 新特性
 
 - 向导 / 连接设置支持 **6 位连接码**（自动解析 `device_mac`）
-- 商家云默认 `ws://192.168.50.52:8084/bridge/connector`（可用环境变量覆盖）
+- 商家云默认 `wss://xiaozhi.cyberai.top/bridge/connector`（可用环境变量覆盖）
 - `--pair` 命令行配对
 - 听写转发：流式注入、清除按钮、配对码在听写页显示（需设备固件配合）
 
@@ -104,10 +109,11 @@ miaoban-bridge --pair 123456
 
 ---
 
-## 商家云（局域网示例）
+## 商家云地址
 
 | 用途 | 地址 |
 |------|------|
-| 管理台登录 | http://192.168.50.52:8084 |
-| 连接器 `server_url` | `ws://192.168.50.52:8084/bridge/connector` |
+| 管理台登录（公网） | https://xiaozhi.cyberai.top |
+| 连接器 `server_url`（内置默认） | `wss://xiaozhi.cyberai.top/bridge/connector` |
+| 局域网测试（可选） | `ws://192.168.50.52:8084/bridge/connector` |
 | 配对码解析 API | `POST /api/public/connector-code-resolve` |
