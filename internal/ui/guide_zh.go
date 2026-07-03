@@ -11,7 +11,7 @@ const GuideZh = `赛搏小小助手 — 使用说明
 • 喵伴已在当前商家云「设备管理」中注册并绑定智能体。
 
 【助手 config.yaml / 向导 — 必填】
-• server_url：ws(s)://主机:端口/bridge/connector（局域网默认 ws://192.168.50.176:8084/bridge/connector）。
+• server_url：ws(s)://主机:端口/bridge/connector（局域网默认 ws://192.168.50.52:8084/bridge/connector）。
 • 设备标识二选一：6 位 pair_code（推荐）或 device_mac（管理台复制）。
 
 【按功能额外需要】
