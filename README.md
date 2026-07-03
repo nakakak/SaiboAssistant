@@ -15,10 +15,10 @@
 
 | 版本 | GitHub | 6 位连接码 | 获取方式 |
 |------|--------|------------|----------|
-| **v0.2.15+**（推荐） | 待发布 | ✅ | 源码 `go build` 或 `./scripts/package-release.sh v0.2.15` |
-| **v0.2.14**（当前 Latest） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.14) | ❌ 仅 MAC | 见下表直接下载 |
+| **v0.2.15**（当前 Latest，推荐） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.15) | ✅ | 见下表直接下载 |
+| **v0.2.14** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.14) | ❌ 仅 MAC | 历史版本 |
 
-### 各操作系统 Release 文件（v0.2.14）
+### 各操作系统 Release 文件（v0.2.15）
 
 | 系统 | CPU | 下载文件 |
 |------|-----|----------|
@@ -32,11 +32,11 @@
 
 ```bash
 curl -fL -o SaiboAssistant-macOS-arm64 \
-  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.14/SaiboAssistant-macOS-arm64
+  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.15/SaiboAssistant-macOS-arm64
 chmod +x SaiboAssistant-macOS-arm64 && ./SaiboAssistant-macOS-arm64
 ```
 
-**需要连接码？** 请用 v0.2.15 源码构建：
+**需要连接码？** 下载 **v0.2.15** 即可；也可源码构建：
 
 ```bash
 cd SaiboAssistant
