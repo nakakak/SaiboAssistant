@@ -1,45 +1,108 @@
-# SaiboAssistant
+# SaiboAssistant（赛搏小小助手）
 
-**赛搏小小助手** v0.2.14 — 本仓库提供 **Release 单文件安装包** 下载（`SaiboAssistant-*`），不含源码。
+喵伴 ↔ 商家云 ↔ 本机 **OpenClaw / 听写** 的连接器。
 
-## 快速开始
+| 组件 | 说明 |
+|------|------|
+| **GUI**（`SaiboAssistant` / `cmd/openclaw-connector`） | 托盘程序，向导支持 **6 位配对码** 或 MAC |
+| **CLI**（`miaoban-bridge` / `lib/bridge.mjs`） | 终端轻量桥接，`--pair` 配对 |
 
-1. 打开 **[v0.2.14 Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.14)**，下载与你系统对应的 `SaiboAssistant-*` 单文件。
-2. 阅读 **[下载与配置指南.md](./下载与配置指南.md)**，完成首次向导配置。
+**完整图文指南：** [下载与配置指南.md](./下载与配置指南.md)（含各系统 Release 下载、安装、配置项总表）
+
+---
+
+## 版本与下载
+
+| 版本 | GitHub | 6 位连接码 | 获取方式 |
+|------|--------|------------|----------|
+| **v0.2.15+**（推荐） | 待发布 | ✅ | 源码 `go build` 或 `./scripts/package-release.sh v0.2.15` |
+| **v0.2.14**（当前 Latest） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.14) | ❌ 仅 MAC | 见下表直接下载 |
+
+### 各操作系统 Release 文件（v0.2.14）
+
+| 系统 | CPU | 下载文件 |
+|------|-----|----------|
+| Windows | x64 | `SaiboAssistant-Windows-x64.exe` |
+| macOS | Apple Silicon (M 系列) | `SaiboAssistant-macOS-arm64` |
+| macOS | Intel | `SaiboAssistant-macOS-x64` |
+| Linux | x86_64 | `SaiboAssistant-Linux-x64` |
+| Linux | arm64 | `SaiboAssistant-Linux-arm64` |
+
+直链示例（Apple Silicon）：
+
+```bash
+curl -fL -o SaiboAssistant-macOS-arm64 \
+  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.14/SaiboAssistant-macOS-arm64
+chmod +x SaiboAssistant-macOS-arm64 && ./SaiboAssistant-macOS-arm64
+```
+
+**需要连接码？** 请用 v0.2.15 源码构建：
+
+```bash
+cd SaiboAssistant
+go build -trimpath -ldflags="-s -w" -o SaiboAssistant ./cmd/openclaw-connector
+./SaiboAssistant
+```
+
+---
+
+## 快速开始（GUI · v0.2.15+）
+
+1. 商家云、设备绑定、`openclaw gateway`（若用 OpenClaw）已就绪。
+2. 喵伴 **OpenClaw / 听写转发** 页查看 **6 位配对码**（助手未连接时显示）。
+3. 运行 SaiboAssistant → 首次向导：勾选功能 → 填 **连接码** → Gateway Token → 完成。
+4. 详见 [下载与配置指南.md § 首次使用全景](./下载与配置指南.md#首次使用全景电脑上要准备哪些信息)。
+
+```bash
+./SaiboAssistant --pair 123456 --headless   # 无界面一次性配对
+```
+
+## 快速开始（CLI）
+
+```bash
+npm install && npm install -g .
+openclaw gateway
+export MIAOBAN_BRIDGE_SERVER_URL="ws://192.168.50.176:8084/bridge/connector"
+miaoban-bridge --pair 123456
+```
+
+---
+
+## v0.2.15 新特性
+
+- 向导 / 连接设置支持 **6 位连接码**（自动解析 `device_mac`）
+- 商家云默认 `ws://192.168.50.176:8084/bridge/connector`（可用环境变量覆盖）
+- `--pair` 命令行配对
+- 听写转发：流式注入、清除按钮、配对码在听写页显示（需设备固件配合）
+
+---
 
 ## 文档
 
 | 文档 | 内容 |
 |------|------|
-| [下载与配置指南.md](./下载与配置指南.md) | v0.2.14 单文件下载、安装、向导配置、MAC/Token、日常使用（含 [配置截图](./docs/images/)） |
+| [下载与配置指南.md](./下载与配置指南.md) | **全平台 Release 下载**、安装、向导、配对码、MAC、托盘 |
+| [BRIDGE_CLI.md](./BRIDGE_CLI.md) | npm CLI（miaoban-bridge） |
 
-## v0.2.14 下载直链
+---
 
-- [Windows x64](https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.14/SaiboAssistant-Windows-x64.exe)
-- [macOS arm64](https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.14/SaiboAssistant-macOS-arm64)
-- [macOS x64](https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.14/SaiboAssistant-macOS-x64)
-- [Linux x64](https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.14/SaiboAssistant-Linux-x64)
-- [Linux arm64](https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.14/SaiboAssistant-Linux-arm64)
+## 打包 Release
 
-## v0.2.14 相对 v0.2.13 的改进
+```bash
+./scripts/package-release.sh v0.2.15        # 本机单平台
+./scripts/package-release.sh v0.2.15 --all  # 五平台 + checksums
+```
 
-- 修复切换商家云后，运行状态窗口**仍显示旧 server_url** 的问题（保存/重连后会刷新）。
+产物在 `dist/`：`SaiboAssistant-<OS>-<arch>` 及 `openclaw-connector_<ver>_<os>_<arch>.tar.gz/.zip`。
 
-## 设备配对说明（v0.2.14）
+推 tag `v*` 后 GitHub Actions 自动发布（见 `.github/workflows/release.yml`）。
 
-- ✅ **仅支持设备 MAC 地址** 连接商家云。
-- ❌ **6 位验证码 / 连接码尚不能使用**（界面可能仍显示，请勿选择）；该能力为 **后期实现**，后续版本会更新文档与 Release 说明。
+---
 
-## 商家云地址（与 xiaozhi.cyberai.top 对齐）
+## 商家云（局域网示例）
 
 | 用途 | 地址 |
 |------|------|
-| 商家云登录 | https://xiaozhi.cyberai.top |
-| **赛搏小小助手 server_url** | **`wss://xiaozhi.cyberai.top/bridge/connector`** |
-| 设备 OTA（固件） | `https://xiaozhi.cyberai.top/api/ota/` |
-
-局域网测试见 [下载与配置指南.md](./下载与配置指南.md) 中的环境对照表。
-
-## v0.2.13 及更早版本要点
-
-- 首次向导不预填商家云地址；修复配置完成后界面崩溃；听写默认仅 inject；托盘常驻。
+| 管理台登录 | http://192.168.50.176:8084 |
+| 连接器 `server_url` | `ws://192.168.50.176:8084/bridge/connector` |
+| 配对码解析 API | `POST /api/public/connector-code-resolve` |

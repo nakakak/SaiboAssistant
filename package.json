@@ -1,0 +1,28 @@
+{
+  "name": "@cyberai/miaoban-bridge",
+  "version": "1.0.0",
+  "description": "喵伴设备与商家云双向桥接 — 连接本机 OpenClaw（小龙虾）",
+  "type": "module",
+  "bin": {
+    "miaoban-bridge": "./bin/miaoban-bridge.mjs"
+  },
+  "main": "./lib/bridge.mjs",
+  "files": [
+    "bin",
+    "lib",
+    "README.zh-CN.md",
+    "config.npm.example.yaml"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "dependencies": {
+    "ws": "^8.21.0"
+  },
+  "keywords": [
+    "miaoban",
+    "openclaw",
+    "bridge"
+  ],
+  "license": "MIT"
+}

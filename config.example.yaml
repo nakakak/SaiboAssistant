@@ -1,0 +1,56 @@
+# =============================================================================
+# 赛搏小小助手 — 首次配置说明（复制为 config.yaml 或交给向导生成）
+#
+# 必填（二选一配对 + 商家云）：
+#   server_url          → ws(s)://主机:端口/bridge/connector
+#   pair_code 或 device_mac → 喵伴屏「配对码」或管理台 MAC
+#
+# OpenClaw 额外：openclaw.mode=gateway_ws + gateway_token + base_url
+# 听写额外：channels.telnet=true, dictation.inject=true, macOS 辅助功能
+# 详见 下载与配置指南.md「首次使用全景」
+# =============================================================================
+
+# 首次向导：设为 true 后，下一次图形启动会运行「赛搏小小助手」多步配置（功能选择、配对信息、权限同意），保存后程序会写回 false。
+# first_run: true
+# channels 可由向导写入；也可在此手动指定 openclaw / telnet 布尔值。
+
+# 商家云 WebSocket 地址（须包含路径 /bridge/connector；不要手写 query，程序会自动附加 device_mac）
+# 本机局域网（默认）：ws://192.168.50.176:8084/bridge/connector
+# 公网云：wss://xiaozhi.cyberai.top/bridge/connector
+server_url: "ws://192.168.50.176:8084/bridge/connector"
+
+# 喵伴设备 MAC；与 pair_code 二选一即可：只填验证码时启动会自动解析 MAC 并写回本文件。
+device_mac: "AA:BB:CC:DD:EE:FF"
+
+# 6 位验证码（可选）。可不填 device_mac，仅填此项时向云端 POST /api/public/connector-code-resolve 换 MAC。
+# pair_code: "123456"
+
+# 旧版兼容（可选，与 device_mac / pair_code 二选一）
+# agent_id: 0
+# server_token: "<商家云 server.token>"
+# token: "<MCP endpoint token>"
+
+# 调用本机 OpenClaw 的方式
+openclaw:
+  # echo：不请求真实 OpenClaw，仅回显文本，用于无 OpenClaw 时的链路自测
+  # http：向 base_url 发 OpenAI 风格 HTTP（OpenClaw 控制端口上通常不是该 API，易踩坑）
+  # gateway_ws：连接本机 OpenClaw Gateway WebSocket（默认 ws://127.0.0.1:18789，与 openclaw gateway 一致）
+  mode: "echo"
+  base_url: "http://127.0.0.1:18789"
+  # --- gateway_ws 专用（mode: gateway_ws 时必填 gateway_token；gateway_ws_url 可省略，由 base_url 推导）---
+  # gateway_token: "<openclaw.json 中 gateway.auth.token，与上方商家云 token 不是同一个>"
+  # gateway_ws_url: "ws://127.0.0.1:18789"
+  # model: "minimax-portal/MiniMax-M2.5"
+  # gateway_same_host / gateway_dial_loopback：图形界面保存时会按 OpenClaw 地址自动写入（本机一般为 true）；一般无需手改。
+  # gateway_same_host: true
+  # gateway_dial_loopback: true
+  # gateway_session_key: "main"
+  # gateway_wait_timeout_ms: 180000
+
+# 听写：经商家云转发到本 Connector（与 OpenClaw 同一条 WebSocket）。
+# inject：写入前台焦点框。macOS 需辅助功能；Windows 为 Ctrl+A/V；Linux 需 xdotool（X11）或 wtype（Wayland），剪贴板依赖 xclip/xsel 等。
+# subtitle：内置 Fyne 置顶字幕窗。默认 false（仅 inject 注入到输入框，无悬浮窗）。
+dictation:
+  enabled: true
+  inject: true
+  subtitle: false   # 仅注入；要悬浮字幕可改为 true

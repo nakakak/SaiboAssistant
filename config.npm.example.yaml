@@ -1,0 +1,4 @@
+# 复制到 ~/.miaoban-bridge/config.yaml（首次 --pair 成功后也会自动生成）
+server_url: "ws://192.168.50.176:8084/bridge/connector"
+# pair_code: "123456"
+# device_mac: "aa:bb:cc:dd:ee:ff"

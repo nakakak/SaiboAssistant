@@ -1,0 +1,21 @@
+# 含 MCP token 与内网地址，切勿提交到 Git
+config.yaml
+*.local.yaml
+
+# 构建产物
+/openclaw-connector
+/openclaw-connector.exe
+/dist/
+SaiboAssistant-*
+
+# 通用
+.DS_Store
+.env
+.env.*
+
+# 本地运行日志
+.connector-run.log
+
+# npm
+node_modules/
+package-lock.json
