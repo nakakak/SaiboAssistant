@@ -7,7 +7,7 @@
 | **GUI**（`SaiboAssistant` / `cmd/openclaw-connector`） | 托盘程序，向导支持 **6 位配对码** 或 MAC |
 | **CLI**（`miaoban-bridge` / `lib/bridge.mjs`） | 终端轻量桥接，`--pair` 配对 |
 
-**完整图文指南：** [下载与配置指南.md](./下载与配置指南.md)（含各系统 Release 下载、安装、配置项总表）
+**连接使用指南：** [下载与配置指南.md](./下载与配置指南.md)（下载 → 配对 → 连上，五步完成）
 
 ---
 
@@ -53,7 +53,7 @@ go build -trimpath -ldflags="-s -w" -o SaiboAssistant ./cmd/openclaw-connector
 1. 商家云、设备绑定、`openclaw gateway`（若用 OpenClaw）已就绪。
 2. 喵伴 **OpenClaw / 听写转发** 页查看 **6 位配对码**（助手未连接时显示）。
 3. 运行 SaiboAssistant → 首次向导：勾选功能 → 填 **连接码** → Gateway Token → 完成。
-4. 详见 [下载与配置指南.md § 首次使用全景](./下载与配置指南.md#首次使用全景电脑上要准备哪些信息)。
+4. 详见 [下载与配置指南.md](./下载与配置指南.md)。
 
 ```bash
 ./SaiboAssistant --pair 123456 --headless   # 无界面一次性配对
