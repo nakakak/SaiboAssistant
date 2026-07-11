@@ -2,6 +2,9 @@
 
 package dictation
 
+// injectRequiresExplicitTarget：Windows/Linux 注入当前键盘焦点，无需 macOS 式 target 捕获。
+func injectRequiresExplicitTarget() bool { return false }
+
 func hasSessionInjectTarget() bool {
 	return false
 }

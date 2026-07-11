@@ -7,6 +7,9 @@ import (
 	"strings"
 )
 
+// injectRequiresExplicitTarget：macOS 须记录前台 App / 鼠标位置后才能切回目标窗口注入。
+func injectRequiresExplicitTarget() bool { return true }
+
 // captureOrPreserveInjectTarget 记录鼠标坐标；前台为 Connector 时用鼠标下的 App 作为注入目标。
 func captureOrPreserveInjectTarget(existing, reason string) string {
 	captureSessionMousePoint()

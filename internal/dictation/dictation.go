@@ -10,7 +10,7 @@ import (
 )
 
 // dictationBuildTag 便于对照日志确认已运行最新 Connector 二进制。
-const dictationBuildTag = "20260703-stream-replace-no-delta"
+const dictationBuildTag = "20260711-win-inject-target-fix"
 
 // Config controls desktop dictation handling from Connector WS.
 type Config struct {
@@ -565,8 +565,8 @@ func (h *Handler) HandleSTT(text string, isFinal bool) {
 		log.Println("dictation: inject skipped (paused; tap 开始传输 on device)")
 	}
 	if doInject {
-		if strings.TrimSpace(targetApp) == "" && !hasSessionInjectTarget() {
-			log.Println("dictation: inject skipped (no target; move mouse to Mac input, then 开始传输)")
+		if injectRequiresExplicitTarget() && strings.TrimSpace(targetApp) == "" && !hasSessionInjectTarget() {
+			log.Println("dictation: inject skipped (no target; move mouse into input, then 开始传输 on device)")
 		} else if err := replaceFocusedField(show, targetApp, isFinal); err != nil {
 			log.Printf("dictation: inject FAILED: %v", err)
 		} else {

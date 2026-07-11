@@ -15,12 +15,13 @@
 
 | 版本 | GitHub | 6 位连接码 | 获取方式 |
 |------|--------|------------|----------|
-| **v0.2.17**（当前 Latest，推荐） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.17) | ✅ | 内置 `wss://xiaozhi.cyberai.top/bridge/connector` |
+| **v0.2.18**（当前 Latest，推荐） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.18) | ✅ | 修复 Windows 听写注入 |
+| **v0.2.17** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.17) | ✅ | 内置 `wss://xiaozhi.cyberai.top/bridge/connector` |
 | **v0.2.16** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.16) | ✅ | 内置 `ws://192.168.50.52:8084/bridge/connector` |
 | **v0.2.15** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.15) | ✅ | 内置 `192.168.50.176` |
 | **v0.2.14** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.14) | ❌ 仅 MAC | 历史版本 |
 
-### 各操作系统 Release 文件（v0.2.17）
+### 各操作系统 Release 文件（v0.2.18）
 
 | 系统 | CPU | 下载文件 |
 |------|-----|----------|
@@ -34,7 +35,7 @@
 
 ```bash
 curl -fL -o SaiboAssistant-macOS-arm64 \
-  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.17/SaiboAssistant-macOS-arm64
+  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.18/SaiboAssistant-macOS-arm64
 chmod +x SaiboAssistant-macOS-arm64 && ./SaiboAssistant-macOS-arm64
 ```
 
@@ -69,6 +70,10 @@ miaoban-bridge --pair 123456
 ```
 
 ---
+
+## v0.2.18 变更
+
+- **修复 Windows 听写注入**：移除误用的 macOS target 检查，识别文字可正常写入当前焦点输入框（使用前请先点一下目标输入框）
 
 ## v0.2.17 变更
 
