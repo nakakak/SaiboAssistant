@@ -444,8 +444,13 @@ func OpenChannelSettingsDialog(parent fyne.Window, cfgPath string, onSaved func(
 		}
 		if chTel.Checked {
 			nc.Channels.Telnet = &t
+			applyDictationDefaultsForTelnet(nc)
 		} else {
 			nc.Channels.Telnet = &f
+			f2 := false
+			nc.Dictation.Enabled = &f2
+			nc.Dictation.Inject = &f2
+			nc.Dictation.Subtitle = &f2
 		}
 		if err := config.Save(cfgPath, nc); err != nil {
 			dialog.ShowError(err, parent)

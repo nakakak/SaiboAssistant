@@ -10,7 +10,7 @@ import (
 )
 
 // dictationBuildTag 便于对照日志确认已运行最新 Connector 二进制。
-const dictationBuildTag = "20260711-win-inject-target-fix"
+const dictationBuildTag = "20260711-chat-inject-space"
 
 // Config controls desktop dictation handling from Connector WS.
 type Config struct {
@@ -504,11 +504,11 @@ func (h *Handler) HandleSTT(text string, isFinal bool) {
 			if strings.HasPrefix(text, stream) {
 				stream += text[len(stream):]
 			} else if !strings.HasSuffix(stream, text) {
-				stream = strings.TrimSpace(stream + "\n" + text)
+				stream = strings.TrimSpace(stream + " " + text)
 			}
-			h.committed = append(h.committed, strings.TrimSpace(stream), "\n")
+			h.committed = append(h.committed, strings.TrimSpace(stream), " ")
 		} else {
-			h.committed = append(h.committed, text, "\n")
+			h.committed = append(h.committed, text, " ")
 		}
 		h.lastPartial = [2]string{"", ""}
 		show = joinCommitted(h.committed)

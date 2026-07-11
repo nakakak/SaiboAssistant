@@ -15,13 +15,14 @@
 
 | 版本 | GitHub | 6 位连接码 | 获取方式 |
 |------|--------|------------|----------|
-| **v0.2.18**（当前 Latest，推荐） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.18) | ✅ | 修复 Windows 听写注入 |
+| **v0.2.19**（当前 Latest，推荐） | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.19) | ✅ | 听写聊天不换行；勾选听写通道自动开启 |
+| **v0.2.18** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.18) | ✅ | 修复 Windows 听写注入 |
 | **v0.2.17** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.17) | ✅ | 内置 `wss://xiaozhi.cyberai.top/bridge/connector` |
 | **v0.2.16** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.16) | ✅ | 内置 `ws://192.168.50.52:8084/bridge/connector` |
 | **v0.2.15** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.15) | ✅ | 内置 `192.168.50.176` |
 | **v0.2.14** | [Release](https://github.com/nakakak/SaiboAssistant/releases/tag/v0.2.14) | ❌ 仅 MAC | 历史版本 |
 
-### 各操作系统 Release 文件（v0.2.18）
+### 各操作系统 Release 文件（v0.2.19）
 
 | 系统 | CPU | 下载文件 |
 |------|-----|----------|
@@ -35,7 +36,7 @@
 
 ```bash
 curl -fL -o SaiboAssistant-macOS-arm64 \
-  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.18/SaiboAssistant-macOS-arm64
+  https://github.com/nakakak/SaiboAssistant/releases/download/v0.2.19/SaiboAssistant-macOS-arm64
 chmod +x SaiboAssistant-macOS-arm64 && ./SaiboAssistant-macOS-arm64
 ```
 
@@ -70,6 +71,11 @@ miaoban-bridge --pair 123456
 ```
 
 ---
+
+## v0.2.19 变更
+
+- **听写聊天模式**：多句合并用空格连接，对话框不再自动换行
+- **连接设置简化**：勾选「听写转发」通道即自动开启 dictation.stt 与 inject，无需单独勾选
 
 ## v0.2.18 变更
 

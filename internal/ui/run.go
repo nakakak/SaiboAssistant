@@ -438,22 +438,6 @@ func (r *Runner) openSettings() {
 	model := widget.NewEntry()
 	model.SetText(c.OpenClaw.Model)
 
-	chEn := widget.NewCheck("接收听写 dictation.stt", nil)
-	if c.Dictation.Enabled != nil {
-		chEn.SetChecked(*c.Dictation.Enabled)
-	} else {
-		chEn.SetChecked(true)
-	}
-	if !c.ChannelTelnet() {
-		chEn.SetChecked(false)
-	}
-	chInj := widget.NewCheck("听写注入到输入框（inject）", nil)
-	if c.Dictation.Inject != nil {
-		chInj.SetChecked(*c.Dictation.Inject)
-	} else {
-		chInj.SetChecked(true)
-	}
-
 	ocHint := widget.NewLabel("OpenClaw 为 gateway_ws 且地址为本机（127.0.0.1）时，保存后会自动写入 gateway_same_host，无需手改 config.yaml。")
 	ocHint.Wrapping = fyne.TextWrapWord
 
@@ -467,7 +451,6 @@ func (r *Runner) openSettings() {
 		widget.NewFormItem("openclaw.gateway_ws_url", gwURL),
 		widget.NewFormItem("gateway_token / bearer", gwTok),
 		widget.NewFormItem("openclaw.model", model),
-		widget.NewFormItem("听写", container.NewVBox(chEn, chInj)),
 	)
 
 	w := r.app.NewWindow("连接设置")
@@ -487,7 +470,7 @@ func (r *Runner) openSettings() {
 			dialog.ShowInformation("填写设备信息", err.Error(), w)
 			return
 		}
-		nc := buildConfigFromForm(c, chOpen, chTel, srv, deviceID, mode, baseURL, gwURL, gwTok, model, chEn, chInj)
+		nc := buildConfigFromForm(c, chOpen, chTel, srv, deviceID, mode, baseURL, gwURL, gwTok, model)
 		if err := config.Save(r.cfgPath, nc); err != nil {
 			dialog.ShowError(err, w)
 			return
@@ -521,7 +504,6 @@ func buildConfigFromForm(
 	deviceID *DeviceIDFields,
 	mode *widget.Select,
 	baseURL, gwURL, gwTok, model *widget.Entry,
-	chEn, chInj *widget.Check,
 ) *config.Config {
 	nc := *base
 	t, f := true, false
@@ -532,8 +514,12 @@ func buildConfigFromForm(
 	}
 	if chTel.Checked {
 		nc.Channels.Telnet = &t
+		applyDictationDefaultsForTelnet(&nc)
 	} else {
 		nc.Channels.Telnet = &f
+		nc.Dictation.Enabled = &f
+		nc.Dictation.Inject = &f
+		nc.Dictation.Subtitle = &f
 	}
 	nc.ServerURL = strings.TrimSpace(srv.Text)
 	nc.Token = ""
@@ -544,10 +530,13 @@ func buildConfigFromForm(
 	nc.OpenClaw.GatewayToken = gwTok.Text
 	nc.OpenClaw.BearerToken = ""
 	nc.OpenClaw.Model = model.Text
-	en := chEn.Checked && chTel.Checked
-	nc.Dictation.Enabled = &en
-	inj := chInj.Checked
-	nc.Dictation.Inject = &inj
-	nc.Dictation.Subtitle = &f // 产品默认：仅 inject，无悬浮字幕
 	return &nc
+}
+
+// applyDictationDefaultsForTelnet 勾选听写通道时默认开启 stt 接收与 inject（无需用户单独配置）。
+func applyDictationDefaultsForTelnet(nc *config.Config) {
+	t, f := true, false
+	nc.Dictation.Enabled = &t
+	nc.Dictation.Inject = &t
+	nc.Dictation.Subtitle = &f
 }
