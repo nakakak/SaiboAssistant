@@ -1,0 +1,2 @@
+c3b8f914cbd14be06402f0aa73dde0185f37e45591895c70e978cab2ec7626ee  SaiboAssistant-Windows-x64.exe
+345005c8a79961013c10825c123003ced163991c54bada218cf64eb43b402fb8  SaiboAssistant-macOS-arm64
